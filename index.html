@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Millenium Clothing Co.</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'millenium-black': '#1a1a1a',
+                        'millenium-gray': '#f4f4f4',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans text-millenium-black antialiased bg-white selection:bg-black selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMobileMenu()" class="p-2 hover:bg-gray-100 rounded-full">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center justify-center md:justify-start w-full md:w-auto absolute md:relative left-0 md:left-auto pointer-events-none md:pointer-events-auto">
+                    <a href="#" class="text-2xl font-bold tracking-widest uppercase font-sans pointer-events-auto">
+                        Millenium
+                    </a>
+                </div>
+
+                <!-- Desktop Links -->
+                <div class="hidden md:flex space-x-12">
+                    <a href="#new" class="text-sm uppercase tracking-widest hover:text-gray-500 transition">New Arrivals</a>
+                    <a href="#collection" class="text-sm uppercase tracking-widest hover:text-gray-500 transition">Collection</a>
+                    <a href="#about" class="text-sm uppercase tracking-widest hover:text-gray-500 transition">Editorial</a>
+                </div>
+
+                <!-- Icons -->
+                <div class="flex items-center space-x-4 md:space-x-6">
+                    <button class="p-2 hover:bg-gray-100 rounded-full hidden sm:block">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-full relative">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <span id="cart-count" class="absolute top-1 right-0 bg-black text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full">
+            <div class="px-4 pt-4 pb-8 space-y-4 flex flex-col items-center">
+                <a href="#new" onclick="toggleMobileMenu()" class="text-lg font-medium hover:text-gray-500">New Arrivals</a>
+                <a href="#collection" onclick="toggleMobileMenu()" class="text-lg font-medium hover:text-gray-500">Collection</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="text-lg font-medium hover:text-gray-500">Editorial</a>
+                <a href="#" class="text-sm text-gray-400 mt-4">Sign In</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" alt="Minimal Fashion" class="w-full h-full object-cover object-center brightness-[0.85]">
+        </div>
+        
+        <!-- Content -->
+        <div class="relative z-10 text-center text-white px-4 fade-in">
+            <p class="text-sm md:text-base uppercase tracking-[0.3em] mb-4">Fall / Winter Collection</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif italic mb-6">Pure Essence</h1>
+            <p class="max-w-lg mx-auto text-gray-200 mb-10 text-sm md:text-base font-light leading-relaxed">
+                Timeless designs. Sophisticated minimalism for modern life in Guelph.
+            </p>
+            <a href="#collection" class="inline-block bg-white text-black px-10 py-4 text-xs uppercase tracking-widest font-bold hover:bg-black hover:text-white transition duration-300">
+                Explore Collection
+            </a>
+        </div>
+    </header>
+
+    <!-- Categories Section -->
+    <section class="py-20 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 h-auto md:h-[600px]">
+                
+                <!-- Card 1 -->
+                <div class="group relative h-[400px] md:h-full overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?q=80&w=1964&auto=format&fit=crop" alt="Women" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-300"></div>
+                    <div class="absolute bottom-8 left-8 text-white">
+                        <h3 class="text-2xl font-serif italic">Women</h3>
+                        <span class="text-xs uppercase tracking-widest mt-2 block border-b border-white w-0 group-hover:w-12 transition-all duration-500">View All</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group relative h-[400px] md:h-full overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?q=80&w=2070&auto=format&fit=crop" alt="Men" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-300"></div>
+                    <div class="absolute bottom-8 left-8 text-white">
+                        <h3 class="text-2xl font-serif italic">Men</h3>
+                        <span class="text-xs uppercase tracking-widest mt-2 block border-b border-white w-0 group-hover:w-12 transition-all duration-500">View All</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative h-[400px] md:h-full overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?q=80&w=1965&auto=format&fit=crop" alt="Accessories" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-300"></div>
+                    <div class="absolute bottom-8 left-8 text-white">
+                        <h3 class="text-2xl font-serif italic">Accessories</h3>
+                        <span class="text-xs uppercase tracking-widest mt-2 block border-b border-white w-0 group-hover:w-12 transition-all duration-500">View All</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products (Shop) -->
+    <section id="collection" class="py-20 bg-millenium-gray/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif italic mb-2">New Arrivals</h2>
+                    <p class="text-gray-500 text-sm uppercase tracking-wider">Seasonal Essentials</p>
+                </div>
+                <a href="#" class="hidden md:block text-xs uppercase tracking-widest hover:underline underline-offset-4">View Full Catalog</a>
+            </div>
+
+            <!-- Product Grid (Populated by JS) -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+                <!-- Products injected here -->
+            </div>
+            
+            <div class="mt-12 text-center md:hidden">
+                 <a href="#" class="text-xs uppercase tracking-widest border-b border-black pb-1">View Full Catalog</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial / About Minimal -->
+    <section id="about" class="py-24 bg-black text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 mb-10 md:mb-0 md:pr-12">
+                    <span class="text-xs font-bold tracking-[0.2em] text-gray-400 block mb-4">ABOUT THE BRAND</span>
+                    <h2 class="text-4xl md:text-5xl font-serif italic mb-6 leading-tight">Conscious design for a modern future.</h2>
+                    <p class="text-gray-400 leading-relaxed mb-8 font-light">
+                        At Millenium Clothing Co., we believe luxury lies in simplicity. Based in the heart of Ontario, every piece is hand-cut using sustainable materials, designed not just to be worn, but to be lived in.
+                    </p>
+                    <a href="#" class="text-white border-b border-white/30 hover:border-white pb-1 transition-colors text-sm tracking-widest uppercase">Our Story</a>
+                </div>
+                <div class="w-full md:w-1/2 relative">
+                    <div class="aspect-[4/5] bg-gray-800 overflow-hidden">
+                         <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=2071&auto=format&fit=crop" alt="Workshop" class="w-full h-full object-cover hover:scale-105 transition duration-700 opacity-80">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-1">
+                    <a href="#" class="text-xl font-bold tracking-widest uppercase mb-6 block">Millenium</a>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Redefining contemporary style in Guelph since 2024.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Shop</h4>
+                    <ul class="space-y-4 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-black transition">Women</a></li>
+                        <li><a href="#" class="hover:text-black transition">Men</a></li>
+                        <li><a href="#" class="hover:text-black transition">Accessories</a></li>
+                        <li><a href="#" class="hover:text-black transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Help</h4>
+                    <ul class="space-y-4 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-black transition">Shipping & Returns</a></li>
+                        <li><a href="#" class="hover:text-black transition">Garment Care</a></li>
+                        <li><a href="#" class="hover:text-black transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-black transition">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest mb-6">Newsletter</h4>
+                    <p class="text-gray-500 text-sm mb-4">Subscribe for exclusive access.</p>
+                    <form class="flex border-b border-gray-300 pb-2" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="you@email.com" class="w-full outline-none placeholder-gray-400 text-sm">
+                        <button type="submit" class="text-xs font-bold uppercase hover:text-gray-600">Join</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-100 text-xs text-gray-400">
+                <p>&copy; 2024 Millenium Clothing Co. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-black">Instagram</a>
+                    <a href="#" class="hover:text-black">Twitter</a>
+                    <a href="#" class="hover:text-black">Pinterest</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar Overlay -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300 opacity-0" onclick="toggleCart()"></div>
+    
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white z-[70] transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+            <h2 class="text-xl font-serif italic">Your Bag (<span id="cart-count-header">0</span>)</h2>
+            <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-full">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Cart Items Area -->
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar">
+            <!-- Empty State -->
+            <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-center text-gray-400">
+                <i data-lucide="shopping-bag" class="w-12 h-12 mb-4 opacity-20"></i>
+                <p>Your bag is empty.</p>
+                <button onclick="toggleCart()" class="mt-4 text-black border-b border-black text-sm uppercase tracking-wider pb-1">Continue Shopping</button>
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-6 border-t border-gray-100 bg-gray-50">
+            <div class="flex justify-between mb-4 text-sm">
+                <span class="text-gray-500">Subtotal</span>
+                <span class="font-bold" id="cart-total">$0.00</span>
+            </div>
+            <button class="w-full bg-black text-white py-4 text-xs uppercase tracking-widest font-bold hover:bg-gray-800 transition">
+                Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-none shadow-lg z-[80] transition-all duration-300 translate-y-20 opacity-0 flex items-center space-x-3">
+        <i data-lucide="check" class="w-4 h-4"></i>
+        <span class="text-sm font-medium">Item added to bag</span>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: "Basic Linen Tee",
+                price: 45.00,
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1780&auto=format&fit=crop",
+                category: "Women"
+            },
+            {
+                id: 2,
+                name: "Structured Jacket",
+                price: 180.00,
+                image: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?q=80&w=1995&auto=format&fit=crop",
+                category: "Men"
+            },
+            {
+                id: 3,
+                name: "Beige Pleated Trousers",
+                price: 120.00,
+                image: "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=1964&auto=format&fit=crop",
+                category: "Women"
+            },
+            {
+                id: 4,
+                name: "Leather Tote Bag",
+                price: 250.00,
+                image: "https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=1938&auto=format&fit=crop",
+                category: "Accessories"
+            }
+        ];
+
+        // Render Products
+        const productGrid = document.getElementById('product-grid');
+        
+        products.forEach(product => {
+            const productHTML = `
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-gray-100">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                        
+                        <!-- Hover Button (Desktop) -->
+                        <button onclick="addToCart(${product.id})" class="absolute bottom-0 left-0 w-full bg-white/90 text-black py-3 uppercase text-xs tracking-widest font-bold translate-y-full group-hover:translate-y-0 transition duration-300 hidden md:block hover:bg-black hover:text-white">
+                            Add to Bag
+                        </button>
+                        
+                        <!-- Mobile Button (Icon) -->
+                        <button onclick="addToCart(${product.id})" class="absolute bottom-3 right-3 bg-white text-black p-3 rounded-full shadow-lg md:hidden active:scale-95 transition">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-medium mb-1 group-hover:underline underline-offset-4">${product.name}</h3>
+                        <p class="text-gray-500 text-sm mb-2">${product.category}</p>
+                        <p class="text-sm font-bold">$${product.price.toFixed(2)}</p>
+                    </div>
+                </div>
+            `;
+            productGrid.innerHTML += productHTML;
+        });
+        
+        // Re-init icons for new elements
+        lucide.createIcons();
+
+        // Cart Logic
+        let cart = [];
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('cart-overlay');
+            const body = document.body;
+
+            if (sidebar.classList.contains('translate-x-full')) {
+                // Open
+                sidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                // Small delay for opacity transition
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                body.style.overflow = 'hidden'; // Prevent background scroll
+            } else {
+                // Close
+                sidebar.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+                body.style.overflow = 'auto';
+            }
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast();
+            
+            // Auto open cart on first add (optional, maybe annoying, keeping closed)
+            // toggleCart(); 
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            const cartCountElements = [document.getElementById('cart-count'), document.getElementById('cart-count-header')];
+            const totalEl = document.getElementById('cart-total');
+
+            // Update Counts
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountElements.forEach(el => {
+                el.innerText = totalItems;
+                if(el.id === 'cart-count') {
+                    if(totalItems > 0) el.classList.remove('opacity-0');
+                    else el.classList.add('opacity-0');
+                }
+            });
+
+            // Calculate Total
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            totalEl.innerText = `$${totalPrice.toFixed(2)}`;
+
+            // Render Items
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '';
+                cartItemsContainer.appendChild(emptyMsg);
+                emptyMsg.style.display = 'flex';
+            } else {
+                emptyMsg.style.display = 'none'; // Hide empty msg, don't remove to keep ref
+                // Clear previous items (keeping the empty msg div in memory essentially)
+                cartItemsContainer.innerHTML = ''; 
+                
+                cart.forEach(item => {
+                    const itemHTML = `
+                        <div class="flex space-x-4 animate-fade-in">
+                            <div class="w-20 h-24 bg-gray-100 flex-shrink-0 overflow-hidden">
+                                <img src="${item.image}" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-medium text-sm">${item.name}</h3>
+                                    <p class="text-gray-500 text-xs mt-1">${item.category}</p>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold">$${item.price.toFixed(2)}</span>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-xs text-gray-500">Qty: ${item.quantity}</span>
+                                        <button onclick="removeFromCart(${item.id})" class="text-xs text-red-500 hover:text-red-700 uppercase tracking-wide">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.innerHTML += itemHTML;
+                });
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-sm');
+            }
+        });
+
+    </script>
+</body>
+</html>
